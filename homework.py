@@ -21,18 +21,6 @@ class InfoMessage:
          о проделанной тренировке. """
         return self.INFO.format(**asdict(self))
 
-    def __init__(self,
-                 training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float) -> None:
-        self.training_type = training_type
-        self.duration = duration
-        self.distance = distance
-        self.speed = speed
-        self.calories = calories
-
 
 class Training:
     """Базовый класс тренировки. """
@@ -48,9 +36,9 @@ class Training:
                  duration: float,
                  weight: float,
                  ) -> None:
-        self.action = action
-        self.duration = duration
-        self.weight = weight
+        self.action: int = action
+        self.duration: float = duration
+        self.weight: float = weight
 
     def get_distance(self) -> float:
         """Получить дистанцию в км. """
@@ -93,7 +81,6 @@ class SportsWalking(Training):
     coeff_walking_calories_1: float = 0.035
     coeff_walking_calories_2: float = 0.029
     height: float
-    in_min: float = 60
 
     def __init__(self,
                  action: int,
@@ -101,7 +88,7 @@ class SportsWalking(Training):
                  weight: float,
                  height: float) -> None:
         super().__init__(action, duration, weight)
-        self.height = height
+        self.height: float = height
 
     def get_spent_calories(self) -> float:
         """Формула для расчёта израсходованных калорий
@@ -121,7 +108,7 @@ class Swimming(Training):
     coeff_swim_calorie_1: float = 1.1
     coeff_swim_calorie_2: int = 2
     length_pool: float
-    count_pool: float
+    count_pool: int
 
     def __init__(self,
                  action: int,
@@ -131,8 +118,8 @@ class Swimming(Training):
                  count_pool: int
                  ) -> None:
         super().__init__(action, duration, weight)
-        self.length_pool = length_pool
-        self.count_pool = count_pool
+        self.length_pool: float = length_pool
+        self.count_pool: int = count_pool
 
     def get_mean_speed(self):
         """Формула расчёта средней скорости при плавании. """
